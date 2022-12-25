@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
+import LazyLoader from '../Components/MasterLayout/LazyLoader';
+const Forget_PW = lazy(() => import('../Components/Forget_PW/Forget_PW')) ;
 
 const Forget_Pass = () => {
     return (
         <div>
-            <h1>Forget</h1>
+            <Suspense fallback = {<LazyLoader/>}>
+                <Forget_PW/>
+            </Suspense>
         </div>
     );
 };
