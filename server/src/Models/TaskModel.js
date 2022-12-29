@@ -11,3 +11,6 @@ const TaskSchema = new Schema({
 const TaskModel = model('tasks', TaskSchema)
 
 module.exports = TaskModel
+
+
+

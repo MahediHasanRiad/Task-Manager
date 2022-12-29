@@ -1,4 +1,4 @@
-const { CreateTask, status, ListByStatus, TotalByStatus } = require('../Controllers/TaskController')
+const { CreateTask, status, ListByStatus, TotalByStatus, deleteTask } = require('../Controllers/TaskController')
 const { RegistrationUser, AllUser, SingleUser, UpdateUser, DeleteUser, LoginUser } = require('../Controllers/UserController')
 const verifyToken = require('../Verification/verify')
 const routers = require('express').Router()
@@ -22,6 +22,6 @@ routers.post('/createtask', verifyToken, CreateTask)
 routers.get('/status/:id/:status', verifyToken, status)
 routers.get('/tasklist/:status', verifyToken, ListByStatus)
 routers.get('/totalStatus', verifyToken, TotalByStatus)
-
+routers.get('/deleteTask/:id', verifyToken, deleteTask);
 
 module.exports = routers

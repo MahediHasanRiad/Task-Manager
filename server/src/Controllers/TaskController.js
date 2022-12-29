@@ -5,7 +5,7 @@ exports.CreateTask = (req, res) => {
     Title: req.body["Title"],
     Description: req.body["Description"],
     Status: req.body["Status"],
-    Email: req.headers.email,
+    Email: req.headers.email
   };
 
   TaskModel.create(allData, (err, data) => {
@@ -26,9 +26,9 @@ exports.status = (req, res) => {
 
   TaskModel.updateOne(query, allData, (err, data) => {
     if (err) {
-      res.json({ massage: "Task Create Error", err });
+      res.status(400).json({ massage: "Task Create Error", err });
     } else {
-      res.json({ massage: "success", data });
+      res.status(200).json({ massage: "success", data });
     }
   });
 };
@@ -82,4 +82,18 @@ exports.TotalByStatus = (req, res) => {
             res.json({massage: 'success', data})
         }
     })
+}
+
+
+exports.deleteTask=(req,res)=>{
+  let id= req.params.id;
+  let Query={_id:id};
+  TaskModel.remove(Query,(err,data)=>{
+      if(err){
+          res.status(400).json({status:"fail",data:err})
+      }
+      else{
+          res.status(200).json({status:"success",data:data})
+      }
+  })
 }

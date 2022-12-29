@@ -7,9 +7,9 @@ exports.RegistrationUser = (req, res) => {
 
     UserModel.create(allData, (err, data) => {
         if(err){
-            res.json({massage: 'Create Error', err})
+            res.status(400).json({massage: 'Create Error', err})
         }else{
-            res.json({massage: 'success', data})
+            res.status(200).json({massage: 'success', data})
         }
     })
 }
@@ -28,7 +28,7 @@ exports.LoginUser = (req, res) => {
     ], (err, data) => {
 
         if(err){
-            res.json({massage: 'Login Failed', err})
+            res.status(400).json({massage: 'Login Failed', err})
         }
         else {
             if(data.length > 0){
@@ -36,9 +36,11 @@ exports.LoginUser = (req, res) => {
                 const payload = {
                     data: data
                 }
+                
                 const token = jwt.sign(payload, 'riad')
-
-                res.json({massage: 'success', data, token})
+                
+                res.status(200).json({massage: 'success', data, token})
+                
             }else{
                 res.json({massage: 'Unauthorized'})
             }
